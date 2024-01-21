@@ -6,7 +6,8 @@ var hEl = document.getElementById('hour'),
   inp = document.getElementById('inp'),
   btn = document.getElementById('btn'),
   select = document.getElementById('select'),
-  title = ''
+  title = '',
+  arrTitles = []
 
 // старт, стоп
 ;(stop = document.getElementById('stop')),
@@ -17,20 +18,25 @@ var hEl = document.getElementById('hour'),
   (play = null),
   (data = ''),
   (local = JSON.parse(localStorage.getItem('stopwatch')))
+  // console.log('local', local);
+  
 
 if (local) {
   data = local
+  // arrTitles = data.titles
 } else {
-  data = []
+  data = {d:[], titles: []}
 }
+console.log('data.titles', data.titles);
 
-getSelect(data)
+getArrayTitles(data.titles)
+getSelect()
 
 // если старт активен и браузер отключался
 if (localStorage.getItem(`start-${title}`)) {
-  setDisabled(1)
+  setDisabled(3)
 } else {
-  setDisabled(2)
+  setDisabled(4)
 }
 
 // Старт
@@ -38,21 +44,17 @@ start.addEventListener('click', () => {
   setDisabled(3)
   setTitle()
   console.log('title', title);
-  
 
-  // title = inp.value
   tStart = Date.now()
-  console.log('start', tStart)
   localStorage.setItem(`start-${title}`, tStart)
-  console.log('localS', `start-${title}`)
 
   play = setInterval(function () {
     var time = Date.now()
     var num = getTime(time - tStart)
-    console.log('', num[3], num[4], num[5])
-
+    console.log('play', num[3], num[4], num[5])
     showTime(num[3], num[4], num[5])
   }, 1000)
+  inp.value = ''
 })
 
 // Стоп
@@ -67,6 +69,20 @@ stop.addEventListener('click', () => {
   showTime(num[3], num[4], num[5])
   remember(Date.now(), time, tStop, tStop - time, title)
   showData()
+  getSelect(data)
+})
+
+inp.addEventListener('click', function(){
+  select.value = ''
+})
+
+select.addEventListener('change', function(){
+  console.log('select: change')
+  inp.value = ''
+  title = select.value
+  if (localStorage.getItem(`start-${title}`)) {
+    setDisabled(3)
+  } else { setDisabled(4) }
 })
 
 function setDisabled(n) {
@@ -93,24 +109,44 @@ function setDisabled(n) {
 }
 
 function remember(date, start, finish, time, title) {
-  data.push({ date, start, finish, time, title })
+  data.d.push({ date, start, finish, time, title })
+  if (!data.titles.includes(title)) {
+    data.titles.push(title)
+  }
   localStorage.setItem('stopwatch', JSON.stringify(data))
 }
-function getSelect(d) {
-  var arr = []
-  for (let item of d) {
-    if (!arr.includes(item.title) && item.title !== '') {
-      arr.push(item.title)
+
+function getArrayTitles (d) {
+  
+  if (!d == '') {
+    console.log('getArrayTitles: d', d);
+    for (let item of d) {
+      if (!arrTitles.includes(item) && item.title !== '') {
+        console.log('getArrayTitles: item', item);
+        
+        arrTitles.push(item)
+      }
     }
   }
-  for (let item of arr) {
+  return arrTitles
+}
+
+function getSelect() {
+  select.innerHTML = "<option value=''></option>"
+  for (let item of arrTitles) {
+    console.log('getSelect: item', item);
+    
       select.innerHTML += `<option value='${item}'>${item}</option>`
   }
 }
 
 function setTitle(){
   if (select.value) title = select.value
-  if (inp.value) title = inp.value
+  if (inp.value) {
+    title = inp.value
+    arrTitles.push(title)
+    getSelect()
+  }
 }
 
 function getTime(t) {
@@ -137,7 +173,9 @@ function showTime(h, m, s) {
 function showData() {
   result.innerHTML = ''
   var d = JSON.parse(localStorage.getItem('stopwatch'))
-  for (let item of d) {
+  console.log('showData: d', d);
+  
+  for (let item of d.d) {
     var date = getTime(item.date),
       time = getTime(item.time),
       sec = Math.round(item.time / 1000)
