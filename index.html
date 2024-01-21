@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./reset.css" />
+    <link rel="stylesheet" href="./main.css" />
+    <title>Stopwatch - 2</title>
+  </head>
+  <body>
+    <a href="./graphics.html" class="graphics">
+      <img class="graphic" src="./img/graphic.svg" alt="graphic">
+    </a>
+    <div class="container">
+      <div class="row">
+        <div class="app">
+          <div class="stopwatch">
+            <div id="hour" class="hour">0</div>
+            <div id="minute" class="minute">00</div>
+            <div id="second" class="second">00</div>
+          </div>
+          <div class="controls">
+            <button id="start" class="start">
+              start
+              <div class="point"></div>
+            </button>
+            <button id="stop" class="stop">
+              stop
+              <div class="point"></div>
+            </button>
+          </div>
+          <div id="result" class="result"></div>
+        </div>
+      </div>
+
+      <div class="todo">
+        <h4>ToDo:</h4>
+        <ul>
+          <li class="done">Сделать замер выключая браузер, не выключая секундомера</li>
+          <li class="done">Запустить секундомер</li>
+          <li class="done">Сохранять данные в таблицу (объект)</li>
+          <li>Выбирать данные, в какие сохранять</li>
+          <li>Создать страницу с данными (данные можно выбирать)</li>
+          <li>Отобразить в canvas</li>
+          <li>Удалять некоторые данные</li>
+          <li></li>
+        </ul>
+      </div>
+    </div>
+
+    <script src="./main.js" />
+  </body>
+</html>

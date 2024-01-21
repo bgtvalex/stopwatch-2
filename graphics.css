@@ -1,0 +1,34 @@
+body {
+	position: relative;
+}
+
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 15px;
+	border: 1px solid;
+}
+
+.row {
+  display: flex;
+  justify-content: space-around;
+	align-items: start;
+}
+.home {
+	position: absolute;
+	display: block;
+	width: 25px;
+	top: 10px;
+	right: 10px;
+}
+
+.result {
+	padding: 10px;
+	border: 1px solid blue;
+	border-radius: 8px;
+}
+
+.canvas {
+	box-shadow: 0px 0px 4px black;
+	border-radius: 8px;
+}

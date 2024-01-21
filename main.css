@@ -1,0 +1,112 @@
+.graphic {
+	position: absolute;
+	display: block;
+	width: 25px;
+	top: 10px;
+	right: 10px;
+}
+
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.app {
+  margin: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  width: 500px;
+}
+
+.stopwatch {
+  padding: 16px 50px;
+  display: flex;
+  justify-content: center;
+  gap: 36px;
+  background: aquamarine;
+  border-radius: 16px;
+  font-size: 32px;
+
+  background: aquamarine;
+  border-radius: 16px;
+  font-size: 32px;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  font-size: 24px;
+}
+
+.start,
+.stop {
+	position: relative;
+	padding: 16px 32px;
+	border-radius: 16px;
+}
+
+.start:hover,
+.stop:hover {
+	opacity: .8;
+}
+
+
+.start:active,
+.stop:active {
+	top: 1px;
+	color: yellow;
+}
+
+.start {
+  position: relative;
+	background-color: green;
+}
+
+.stop {
+	background-color: red;
+}
+
+.stop:disabled .point,
+.start:disabled .point {
+  display: block;
+}
+
+.noHover{
+  pointer-events: none;
+}
+
+.point {
+  display: none;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 7px;
+  height: 7px;
+  border: 1px solid black;
+  border-radius: 50%;
+  background: red;
+}
+
+.todo {
+  padding: 10px 15px;
+  border: 1px solid brown;
+  border-radius: 15px;
+  background-color: aquamarine;
+  color: #222;
+}
+
+.done {
+  color: gray;
+  text-decoration: line-through;
+}
