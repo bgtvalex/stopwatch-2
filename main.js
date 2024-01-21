@@ -10,6 +10,7 @@ var hEl = document.getElementById('hour'),
   data = '',
   local = JSON.parse(localStorage.getItem('stopwatch'))
 
+
 if ( local ) {
   data = local
 } else {
