@@ -60,9 +60,9 @@ start.addEventListener('click', () => {
 // Стоп
 stop.addEventListener('click', () => {
   setDisabled(4)
-  localStorage.removeItem(`start-${title}`)
-
+  
   var time = +localStorage.getItem(`start-${title}`)
+  localStorage.removeItem(`start-${title}`)
   clearInterval(play)
   tStop = Date.now()
   var num = getTime(tStop - time)

@@ -12,33 +12,30 @@ const ROWS_COUNT = 5
 const VIEW_HEIGH = DPI_HEIGHT - PADDING * 2
 
 
-let test = [
-	[0,0],
-	[100,200],
-	[200,300]
-]
 
-showData(data)
-drawGraph(document.getElementById('canvas'), data)
+showData(data.d)
+drawGraph(document.getElementById('canvas'), data.d)
 
 
 
 
-function drawGraph(canvas, data) {
+function drawGraph(canvas, d) {
 	var c = canvas.getContext('2d')
 	canvas.style.width = WIDTH + 'px'
 	canvas.style.height = HEIGHT + 'px'
 	canvas.width = DPI_WIDTH
 	canvas.height = DPI_HEIGHT
 
-	var co = coords(data)
+	var co = coords(d)
   c.fillStyle = 'Blue'
   c.fillRect(0, 0, 5000, 2500)
 
 	// yAxes
-	const [yMin, yMax] = countBoundaries(data)
+	const [yMin, yMax] = countBoundaries(d)
 	const yRatio = VIEW_HEIGH / (yMax - yMin)
-	console.log('', yRatio);
+	console.log('yRatio', yRatio);
+	console.log('yMin', yMin);
+	console.log('yMax', yMax);
 	
 	
 	c.beginPath()
@@ -50,6 +47,9 @@ function drawGraph(canvas, data) {
 	for (let i = 1; i <= ROWS_COUNT; i++) {
 		const y = step * i
 		const text = Math.round(yMax - textStep * i)
+		console.log('text', text);
+		console.log('textStep', textStep);
+		
 		c.fillText(text.toString(), 0, y + PADDING -5)
 		c.moveTo(0, y + PADDING)
 		c.lineTo(DPI_WIDTH, y + PADDING)
@@ -74,7 +74,7 @@ function countBoundaries(d) {
 	let min, max
 
 	for (let item of d) {
-		var y = Math.round(item[3]/1000)
+		var y = Math.round(item.time/1000)
 		
 		if (typeof min !== 'number') min = y
 		if (typeof max !== 'number') max = y
@@ -88,20 +88,22 @@ function countBoundaries(d) {
 function showData(d) {
   result.innerHTML = ''
   for (let item of d) {
-    var date = getTime(item[0]),
-      time = getTime(item[3]),
-      sec = Math.round(item[3] / 1000)
-    result.innerHTML += `[${date[2]}.${date[1]}.${date[0]}]  ${time[3]}:${time[4]}:${time[5]} - ${sec}s<br>`
+    var date = getTime(item.date),
+      time = getTime(item.time)
+      // sec = Math.round(item.time / 1000)
+    result.innerHTML += `[${date[2]}.${date[1]}.${date[0]}]  ${time[3]}:${time[4]}:${time[5]}<br>`
   }
 }
 
 function coords(d) {
   var arr = []
+	
   for (let item of d) {
-    var date = getTime(item[0]),
-      sec = Math.round(item[3] / 1000)
-    arr.push([`${date[2]}.${date[1]}.${date[0]}`, sec])
+		var date = getTime(item.date),
+		sec = Math.round(item.time / 1000)
+    arr.push([`${date[0]}.${date[1]}.${date[0]}`, sec])
   }
+	console.log('coords: arr', arr);
   return arr
 }
 
