@@ -45,7 +45,7 @@ function drawGraph(canvas, data) {
 	const step = VIEW_HEIGH / ROWS_COUNT
 	const textStep = (yMax - yMin) / ROWS_COUNT
 	// c.strokeStyle = '#bbb'
-	c.fillStyle = 'black'
+	c.fillStyle = 'orange'
 	c.font = 'normal 20px Helvetica, sans-serif'
 	for (let i = 1; i <= ROWS_COUNT; i++) {
 		const y = step * i
