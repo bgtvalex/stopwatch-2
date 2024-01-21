@@ -12,6 +12,35 @@
   padding: 15px;
 }
 
+.input-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+}
+
+.inp {
+  border: 1px solid blue;
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+
+.btn {
+  padding: 5px 10px;
+  border: 1px solid blue;
+  border-radius: 10px;
+  color: white;
+  background: blue;
+}
+
+.select {
+  border: 1px solid blue;
+  padding: 5px 10px;
+  border-radius: 10px;
+  width: 100%;
+}
+
 .row {
   display: flex;
   justify-content: center;
